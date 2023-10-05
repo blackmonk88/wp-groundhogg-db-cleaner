@@ -5,7 +5,7 @@
  */
 
 // config defined here
-$trim_interval = '3 month';
+$trim_interval = '1 month';
 
 // Load WordPress
 define('WP_USE_THEMES', false);
@@ -13,7 +13,7 @@ define('WP_USE_THEMES', false);
 require_once('wp-load.php');
 global $wpdb;
 
-$query_trim_aws_email_queue = "SELECT * FROM `{$wpdb->prefix}_gh_aws_email_queue` WHERE `status` = 'failed' AND `time` <= NOW() - INTERVAL '{$trim_interval}';";
+$query_trim_aws_email_queue = "DELETE FROM `{$wpdb->prefix}gh_aws_email_queue` WHERE `status` = 'failed' AND `time` <= NOW() - INTERVAL {$trim_interval};";
 
 // Execute the query
 $trim_aws_email_queue_rows = $wpdb->query($query_trim_aws_email_queue);
