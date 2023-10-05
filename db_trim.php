@@ -15,7 +15,7 @@ global $wpdb;
 
 $query_trim_aws_email_queue = "DELETE FROM `{$wpdb->prefix}gh_aws_email_queue` WHERE `status` = 'failed' AND `time` <= NOW() - INTERVAL {$trim_interval};";
 
-// Execute the query
+// Execute trim
 $trim_aws_email_queue_rows = $wpdb->query($query_trim_aws_email_queue);
 
 if ($trim_aws_email_queue_rows === false) {
@@ -23,3 +23,7 @@ if ($trim_aws_email_queue_rows === false) {
 } else {
     echo "AWS Email Queue: $trim_aws_email_queue_rows rows deleted successfully.<br />";
 }
+
+// Execute optimize table
+$query_optimize_aws_email_queue = "OPTIMIZE TABLE `{$wpdb->prefix}gh_aws_email_queue`;";
+$optimize_aws_email_queue       = $wpdb->query($query_optimize_aws_email_queue);
