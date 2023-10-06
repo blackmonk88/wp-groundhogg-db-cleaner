@@ -1,6 +1,6 @@
 <?php
 /*
- * DB cleaner for very big groundhogg logs
+ * DB cleaner for very big Groundhogg AWS SES logs
  * Author : Fany Siswanto <blackmonk88@gmail.com>
  */
 
